@@ -32,8 +32,21 @@ game.PlayerEntity = me.Entity.extend({
              this.body.vel.x = 0;
         }
     
-       
-        if(this.body.vel.x !== 0) {
+    
+          if(me.input.isKeyPressed(attack)) {
+           if (!this.renderable.isCurrentAnimation("attack")) {
+           console.log(!this.renderable.isCurrentAnimation("attack"));
+          //Sets the current animation to attack and once that  is over
+          //goes back to  the idle animation
+          this.renderable.setCurrentAnimation ("attack", "idle");
+          //Makes it so  that the next time we start this sequence we beegin
+          //from the first animation, not wherever we left off when we
+          //switched to another animation
+            this.renderable.setAnimationFrame();
+        }
+         }
+        
+       else if(this.body.vel.x !== 0) {
         if(!this.renderable.isCurrentAnimation("walk")) {
             this.renderable.setCurrentAnimation ("walk");
         }
@@ -41,9 +54,9 @@ game.PlayerEntity = me.Entity.extend({
             this.renderable.setCurrentAnimation("idle");
         }
        
-         if (me.input.isKeyPressed("attack")) {
-         if (!this.renderable.isCurrentAnimation("attack")) {
-          console.log (!this.renderable.isCurrentAnimation("attack"))
+           if(me.input.isKeyPressed(attack)) {
+           if (!this.renderable.isCurrentAnimation("attack")) {
+           console.log(!this.renderable.isCurrentAnimation("attack"));
           //Sets the current animation to attack and once that  is over
           //goes back to  the idle animation
           this.renderable.setCurrentAnimation ("attack", "idle");
@@ -61,7 +74,7 @@ game.PlayerEntity = me.Entity.extend({
    }
    });
    
-game.PlayerBaseEntity = me.Entity.extend({
+   game.PlayerBaseEntity = me.Entity.extend({
     init : function(x, y, settings) {
         this._super(me.Entity, 'init', [x, y, {
                 image: "tower",
