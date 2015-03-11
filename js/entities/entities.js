@@ -16,7 +16,8 @@ game.PlayerEntity = me.Entity.extend({
         
         this.renderable.addAnimation("idle",  [78]);
         this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
-    
+        this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72], 80);
+        
         this.renderable.setCurrentAnimation("idle");
     },
     
@@ -31,6 +32,7 @@ game.PlayerEntity = me.Entity.extend({
              this.body.vel.x = 0;
         }
     
+       
         if(this.body.vel.x !== 0) {
         if(!this.renderable.isCurrentAnimation("walk")) {
             this.renderable.setCurrentAnimation ("walk");
@@ -39,10 +41,21 @@ game.PlayerEntity = me.Entity.extend({
             this.renderable.setCurrentAnimation("idle");
         }
        
-        
-       
-       this.body.update(delta);
-        
+         if (me.input.isKeyPressed("attack")) {
+         if (!this.renderable.isCurrentAnimation("attack")) {
+          console.log (!this.renderable.isCurrentAnimation("attack"))
+          //Sets the current animation to attack and once that  is over
+          //goes back to  the idle animation
+          this.renderable.setCurrentAnimation ("attack", "idle");
+          //Makes it so  that the next time we start this sequence we beegin
+          //from the first animation, not wherever we left off when we
+          //switched to another animation
+            this.renderable.setAnimationFrame();
+        }
+         }
+            
+             this.body.update(delta);
+     
         this._super(me.Entity, "update", [delta]);
         return true;
    }
