@@ -29,15 +29,12 @@ game.PlayerEntity = me.Entity.extend({
     },
     update: function(delta) {
         this.now = new Date().getTime();
-        
-        if (this.health <= 0){
-            this.dead = true;
-            this.pos.x = 10;
-            this.pos.y = 0;
-            this.health = game.data.playerHealth;
-        }
+          
+        if (this.health <= 0) {
+            this.dead = true;    
+        }    
             
-            if (me.input.isKeyPressed("right")) {
+         if (me.input.isKeyPressed("right")) {
             //adds to the position of my x by  the velocity defined above in
             //setVelocity() and multiplying it by me.timer.tick.
             //me.timer.tick makes the movement look smooth
@@ -101,10 +98,10 @@ game.PlayerEntity = me.Entity.extend({
             }
             else if (xdif > -35 && this.facing === 'right' && (xdif < 0)) {
                 this.body.vel.x = 0;
-                this.pos.x = this.pos.x - 1;
+                // this.pos.x = this.pos.x - 1;
             } else if (xdif < 70 && this.facing === 'left' && xdif > 0) {
                 this.body.vel.x = 0;
-                this.pos.x = this.pos.x + 1;
+                //this.pos.x = this.pos.x + 1;
             }
 
             if (this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= game.data.playerAttackTimer) {
@@ -117,12 +114,12 @@ game.PlayerEntity = me.Entity.extend({
             var ydif = this.pos.y - response.b.pos.y;
             
             if (xdif>0){
-                this.pos.x = this.pos.x + 1;
+                //this.pos.x = this.pos.x + 1;
                 if(this.facing==="left"){
                     this.body.vel.x = 0;
                 }
             }else{
-                this.pos.x = this.pos.x - 1;
+                //this.pos.x = this.pos.x - 1;
                   if(this.facing==="right"){
                     this.body.vel.x = 0;
                 }
@@ -328,6 +325,10 @@ game.GameManager = Object.extend({
     
     update: function() {
         this.now = new Date().getTime();
+        
+        if(game.data.player.dead){
+            me.state.current().resetPlayer(10, 0);
+        }
         
         if(Math.round(this.now/1000)%10 ===0 && (this.now - this.lastCreep >= 1000)){
             this.lastCreep = this.now;
