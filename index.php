@@ -19,7 +19,7 @@
 		<!-- melonJS Library -->
 		<!-- build:js js/app.min.js -->
 		<script type="text/javascript" src="lib/melonJS-1.1.0-min.js"></script>
-
+                
 		<!-- Plugin(s) -->
 		<script type="text/javascript" src="lib/plugins/debugPanel.js"></script>
 		
@@ -28,7 +28,11 @@
 		<script type="text/javascript" src="js/resources.js"></script>
 
 		<script type="text/javascript" src="js/entities/entities.js"></script>
-		<script type="text/javascript" src="js/entities/HUD.js"></script>
+                <script type="text/javascript" src="js/EnemyBaseEntity.js"></script>
+                <script type="text/javascript" src="js/PlayerBaseEntity.js"></script>
+		<script type="text/javascript" src="js/GameManager.js"></script>
+                <script type="text/javascript" src="js/EnemyCreep.js"></script>
+                <script type="text/javascript" src="js/entities/HUD.js"></script>
 
 		<script type="text/javascript" src="js/screens/title.js"></script>
 		<script type="text/javascript" src="js/screens/play.js"></script>
