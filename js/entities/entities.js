@@ -110,7 +110,7 @@ this.setSuper(x, y);
         this.stopMovement(xdif);
         
         
-        
+          
     },
             stopMovement: function(xdif){
              if (xdif > 0) {
