@@ -74,12 +74,13 @@ this.setSuper(x, y);
         this.attacking = me.input.isKeyPressed("attack");
         },
         moveRight: function() {
-
+                this.body.vel.x += this.body.accel.x * me.timer.tick;
+                this.renderable.flipX(true);
         },
         moveLeft: function() {
         this.facing = "left";
                 this.body.vel.x -= this.body.accel.x * me.timer.tick;
-                this.flipX(false);
+                this.renderable.flipX(false);
         },
         jump: function() {
         this.jumping = true;
@@ -101,13 +102,34 @@ this.setSuper(x, y);
         
         },
         collideWithEnemyBase: function(response){
-            var xdif = this.pos.x - response.b.pos.x;
-            var ydif = this.pos.y - response.b.pos.y;
- 
+          
+          var ydif = this.pos.y - response.b.pos.y;
+          if(ydif < - 40 && xdif < 70 && xdif > -35) {
+              this.body.falling = false;
+              this.body.vel.y =  - 1;
+          }else if (xdif > - 35 && this.facing === "right" && (xdif < 0)){
+               this.body.vel.y = 0;
+          }else if (ydif < - 40) {
+            this.body.falling = false;
+            this.pos.y = this.pos.y -1;
+          }
+          if(!this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= game.data.playerAttackTimer) {
+              this.lastHit = this.now
+              response.b.loseHealth(game.data.playerattack);
+          }
+          },
+            
+           collideWithEnemyCreep: function(response){
+           var xdif = this.pos.x - response.b.pos.x;
+           var ydif = this.pos.y - response.b.pos.y;
   
          
         
         this.stopMovement(xdif);
+        
+        if(this.checkAttack(xdif, ydif)){
+            this.hitCreep(response);
+        }
         
         
           
