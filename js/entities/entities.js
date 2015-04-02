@@ -102,7 +102,7 @@ this.setSuper(x, y);
         
         },
         collideWithEnemyBase: function(response){
-          
+          var xdif = this.pos.x - response.b.pos.x;
           var ydif = this.pos.y - response.b.pos.y;
           if(ydif < - 40 && xdif < 70 && xdif > -35) {
               this.body.falling = false;
