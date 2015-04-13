@@ -104,11 +104,18 @@ game.SpendGold = Object.extend({
      startBuying: function() {
          this.buying = true;
          me.State.pause(me.state.PLAY);
+         game.data.pausePos = me.game.viewport.localToWorld(0, 0);
+         game.data.buyscreen =  new me.Sprite(game.data.pausePos.x,  game.data.pausePos.y,  me.loader.getImage('gold-screen'));
+         game.data.buyscreen.updateWhenPaused = true;
+         game.data.buyscreen.setOpacity(0.8);
+         me.game.world.addChild(game.data.buyscreen,  34);
+         
      },
      
      stopBuying: function () {
          this.buying = false;
          me.state.resume(me.state.PLAY);
+         me.game.world.removeChild(game.data.buyscreen);
      }
          
      });
