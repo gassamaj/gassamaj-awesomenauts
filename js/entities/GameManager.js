@@ -98,10 +98,12 @@ game.SpendGold = Object.extend({
              
          }
          
+         this.checkBuyKeys();
+         
          return true;
      },
      
-     startBuying: function() {
+    startBuying: function() {
          this.buying = true;
          me.state.pause(me.state.PLAY);
          game.data.pausePos = me.game.viewport.localToWorld(0, 0);
@@ -154,8 +156,23 @@ game.SpendGold = Object.extend({
          me.input.unbindKey(me.input.KEY.F5,  "F5", true);
          me.input.unbindKey(me.input.KEY.F6,  "F6", true);
          me.game.world.removeChild(game.data.buytext);
-     }
-         
-     });
+     },
      
-  
+     checkBuyKeys: function() {
+         if(me.input.isKeyPressed("F1")){
+             
+         }else if(me.input.isKeyPressed("F2")){
+             
+         }else if (me.input.isKeyPressed("F3")){
+     
+         }else if(me.input.isKeyPressed("F4")){
+             
+         }else if(me.input.isKeyPressed("F5")){
+    
+         }
+         
+     }
+
+
+
+});
