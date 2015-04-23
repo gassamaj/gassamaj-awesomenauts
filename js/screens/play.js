@@ -20,6 +20,11 @@ game.PlayScreen = me.ScreenObject.extend({
                 var spendGold = me.pool.pull ("SpendGold", 0, 0, {});
                 me.game.world.addChild(spendGold, 0);
                 
+                
+            
+            
+            
+                 
                 me.input.bindKey(me.input.KEY.B, "buy");
                 me.input.bindKey (me.input.KEY.Q, "ski111");
                 me.input.bindKey(me.input.KEY.W, "ski112"); 
