@@ -56,15 +56,12 @@ var game = {
 			me.plugin.register.defer(this, debugPanel, "debug");
 		});
 	}
+         
+        me.state.SPENDEXP = 112; 
+        me.state.Load =  113;
+        me.state.NEW = 114;
         
-        me.save.add({exp: 0, exp1: 0, exp2: 0,  exp3:  0, exp4: 0});
-         
-       me.state.SPENDEXP = 112; 
-         
-        console.log(game.data.exp);
-        console.log(game.data.exp2);
-         
-	// Initialize the audio.
+        // Initialize the audio.
 	me.audio.init("mp3,ogg");
 
 	// Set a callback to run when loading is complete.
@@ -87,12 +84,15 @@ var game = {
                me.pool.register("HeroDeathManager", game.HeroDeathManager);
                me.pool.register("ExperienceManager", game.ExperienceManager);
                me.pool.register("SpendGold", game.SpendGold);
+               me.pool.register("spear", game.SpearThrow, true);
+               me.pool.register("minimap", game.MiniMap, true);
+               me.pool.register("miniplayer", game.MiniPlayerLocation, true);
                
                me.state.set(me.state.MENU, new game.TitleScreen());
 	       me.state.set(me.state.PLAY, new game.PlayScreen());
-               me.state.set(me.state.SPENDEXP, new game.SpendExp());
-
-		// Start the game.
-		me.state.change(me.state.MENU);
+               me.state.set(me.state.Load, new game.LoadProfile());
+               me.state.set(me.state.NEW, new game.NewProfile());
+           
+	      me.state.change(me.state.MENU);
     }
 };
