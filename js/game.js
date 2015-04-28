@@ -58,7 +58,7 @@ var game = {
 	}
          
         me.state.SPENDEXP = 112; 
-        me.state.Load =  113;
+        me.state.LOAD =  113;
         me.state.NEW = 114;
         
         // Initialize the audio.
@@ -90,7 +90,7 @@ var game = {
                
                me.state.set(me.state.MENU, new game.TitleScreen());
 	       me.state.set(me.state.PLAY, new game.PlayScreen());
-               me.state.set(me.state.Load, new game.LoadProfile());
+               me.state.set(me.state.LOAD, new game.LoadProfile());
                me.state.set(me.state.NEW, new game.NewProfile());
            
 	      me.state.change(me.state.MENU);
