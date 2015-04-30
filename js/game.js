@@ -6,6 +6,8 @@ var game = {
 	data : {
 		// score
 		score : 0,
+                option1: "",
+                option2: "",
                 enemyBaseHealth: 1,
                 playerBaseHealth: 1,
                 enemyCreepHealth: 10,
@@ -95,3 +97,4 @@ var game = {
 	      me.state.change(me.state.MENU);
     }
 };
+
