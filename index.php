@@ -30,7 +30,7 @@
                     
                     <div class='password'>
                         <label for='password'>Password</label>
-                        <input type='text' name='password' id='password'>
+                        <input type='password' name='password' id='password'>
                     </div>
                     
                     <button type='button' id='register'>Register</button>
@@ -120,7 +120,7 @@
                  $("#load").bind("click", function(){
                   $.ajax({
                       type: "POST",
-                      url: "php/controller/create-user.php",
+                      url: "php/controller/login-user.php",
                       data: {
                       username: $('#username').val(),
                       password: $('#password').val()
@@ -128,11 +128,17 @@
                     dataType: "text"
                   })
                   .success(function(response){
-                      if(response==="true"){
-                          me.state.change(me.state.PLAY);
-                      }else{
+                      if(response==="Invalid username and password"){
                           alert(response);
-                      }
+                      }else{
+                         var data = jQuery.parseJSON(response);
+                         game.data.exp = data["exp"];
+                         game.data.exp1 = data["exp1"]; 
+                         game.data.exp2 = data["exp2"]; 
+                         game.data.exp3 = data["exp3"]; 
+                         game.data.exp4 = data["exp4"];
+                         me.state.change(me.state.SPENDEXP);
+                        }
                   })
                   .fail(function(response){
                      alert("Fail");

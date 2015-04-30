@@ -25,6 +25,7 @@ this.setSuper(x, y);
         setPlayerTimers: function() {
         this.now = new Date().getTime();
                 this.lastHit = this.now;
+                this.lastSpear = this.now;
                 this.lastAtAttack = new Date().getTime(); //Haven't used this
         },
         setAttributes: function() {
@@ -47,18 +48,21 @@ this.setSuper(x, y);
         this.now = new Date().getTime();
                 this.dead = this.checkIfDead();
                 this.checkKeyPressesAndMove();
+                this.checkAbilityKeys();
                 this.setAnimation();
                 me.collision.check(this, true, this.collideHandler.bind(this), true);
                 this.body.update(delta);
                 this._super(me.Entity, "update", [delta]);
                 return true;
         },
+        
         checkIfDead: function() {
         if (this.health <= 0) {
         return true;
         }
         return false;
         },
+        
         checkKeyPressesAndMove: function() {
         if (me.input.isKeyPressed("right")) {
         this.moveRight();
@@ -74,6 +78,7 @@ this.setSuper(x, y);
 
         this.attacking = me.input.isKeyPressed("attack");
         },
+        
         moveRight: function() {
                 this.body.vel.x += this.body.accel.x * me.timer.tick;
                 this.renderable.flipX(true);
@@ -87,7 +92,27 @@ this.setSuper(x, y);
         this.jumping = true;
                 this.body.vel.y -= this.body.accel.y * me.timer.tick;
         },
-        setAnimation: function() {
+        
+        checkAbilityKeys: function(){
+            if(me.input.isKeyPressed("skill1")){
+                //this.speedBurst();
+            }else if (me.input.isKeyPressed("skill2")){
+                //this.eatCreep();
+            }
+            else if (me.input.isKeyPressed("skill3")){
+                this.throwSpear();
+            }
+        },
+        
+        throwSpear: function(){
+            if(this.lastSpear >= game.data.spearTimer && game.data.ability3 >= 0){
+            this.lastSpear = this.now;
+            var spear = me.pool.pull("spear", this.pos.x, this.pos.y, {});
+            me.game.world.addChild(spear, 10);
+        }
+        },
+        
+         setAnimation: function() {
 
         },
         loseHealth: function(damage) {
